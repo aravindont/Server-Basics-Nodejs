@@ -38,3 +38,57 @@ Call the `listen()` method on the server constant like below:
 - Below is the response from server
 
 ![server-response](./images/server-response.PNG)
+
+# How to create a Node server with express
+
+- Previously we used to terminate and restart the server whenever we made changes in the `index.js` file to solve that we can use package called `nodemon` which automatically refresh the server whenever we make changes.
+
+- `npm i nodemon`
+
+- Also install the express package like so: `npm i express`
+
+- Express is the NodeJs framework
+
+- create a file named `app.js`
+
+- inside that file require the `express` and assign it to the constant `app`
+
+> const express=require('express);
+
+> const app=express();
+
+- Export the `app` constant to make it availabel in other file within directory.
+
+> module.exports=app;
+
+- Inside the `index.js` require the `app` that we exported from `app.js`
+
+> const app=require('./app);
+
+- Next, set the posrt using the app like below
+
+> app.set('port',3000);
+
+- And Replace the code inside `http.ceateServer()` with just `app`
+
+> const server=http.createServer(app);
+
+- The above code directs all API management to the `app.js` and helps in separating the concerns.
+
+- Back in the `app.js` file let's create a endpoint to speak to server since we have directed all API management to it.
+
+```javascript
+app.use((request, response) => {
+  response.json({ message: "Response from server" });
+});
+```
+
+- To start the server first make the below change inside the `package.json` file
+
+![nodemon](./images/nodemon.PNG)
+
+- And give the command like `npm run server` in the terminal
+
+- Here's the output that i got in the postman
+
+![express-response](./images/express-response.PNG)

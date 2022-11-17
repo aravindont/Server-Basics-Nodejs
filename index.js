@@ -1,7 +1,7 @@
 const http=require('http');
+const app=require('./app');
 
-const server=http.createServer((request,response) => {
-    response.end("Response from server")
-});
+app.set('port',3000);
+const server=http.createServer(app);
 
 server.listen(3000);
